@@ -2,13 +2,13 @@ package io.github.infraredpanda.findthecenter;
 
 import org.slf4j.Logger;
 import org.spongepowered.api.Game;
+import org.spongepowered.api.command.spec.CommandSpec;
 import org.spongepowered.api.event.Listener;
 import org.spongepowered.api.event.game.state.GameInitializationEvent;
 import org.spongepowered.api.event.game.state.GamePostInitializationEvent;
 import org.spongepowered.api.event.game.state.GamePreInitializationEvent;
 import org.spongepowered.api.plugin.Plugin;
 import org.spongepowered.api.text.Texts;
-import org.spongepowered.api.util.command.spec.CommandSpec;
 
 import com.google.inject.Inject;
 
@@ -17,7 +17,7 @@ import io.github.infraredpanda.findthecenter.commands.FindTheCenterExecutor;
 @Plugin(id = "FindTheCenter", name = "FindTheCenter", version = "0.1", dependencies = "required-after:Inspector")
 public class FindTheCenter
 {
-	public Game game;
+	public static Game game;
 	
 	@Inject
 	private Logger logger;
@@ -44,7 +44,7 @@ public class FindTheCenter
 			.executor(new FindTheCenterExecutor())
 			.build();
 
-		game.getCommandDispatcher().register(this, findTheCenterCommandSpec, "ftc", "findthecenter");
+		game.getCommandManager().register(this, findTheCenterCommandSpec, "ftc", "findthecenter");
 	}
 
 	@Listener
